@@ -2,8 +2,8 @@
 name = "vorbis-sys"
 version = "0.0.1"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
-build = "build.rs"
-links = ["vorbis", "vorbisfile"]
+build = "libvorbis/build.rs"
+links = "vorbis"
 
 [dependencies.ogg-sys]
 git = "https://github.com/tomaka/ogg-sys"
