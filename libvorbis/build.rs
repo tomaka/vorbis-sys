@@ -1,6 +1,13 @@
+extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
 fn main() {
+    let opts = pkg_config::default_options("vorbis");
+    match pkg_config::find_library_opts("vorbis", &opts) {
+        Ok(()) => return,
+        Err(..) => {}
+    };
+
     let root = Path::new(std::os::getenv("CARGO_MANIFEST_DIR").unwrap())
         .join("libvorbis");
 
