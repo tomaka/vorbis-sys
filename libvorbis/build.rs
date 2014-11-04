@@ -18,6 +18,7 @@ fn main() {
     };
 
     println!("cargo:include={}", root.join("include").as_str().unwrap());
+    println!("cargo:src={}", root.join("lib").as_str().unwrap());
 
     gcc::compile_library("libvorbis.a", &config, &[
         "libvorbis/lib/analysis.c",
