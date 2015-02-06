@@ -1,5 +1,7 @@
 [package]
 name = "vorbis-sys"
+description = "FFI for the libvorbis library"
+license = "MIT"
 version = "0.0.2"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libvorbis/build.rs"
