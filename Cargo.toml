@@ -1,15 +1,13 @@
 [package]
 name = "vorbis-sys"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Pierre Krieger <pierre.krieger1708@gmail.com>"]
 build = "libvorbis/build.rs"
 links = "vorbis"
 
-[dependencies.ogg-sys]
-git = "https://github.com/tomaka/ogg-sys"
+[dependencies]
+ogg-sys = "*"
 
-[build-dependencies.gcc]
-git = "https://github.com/alexcrichton/gcc-rs"
-
-[build-dependencies.pkg-config]
-git = "https://github.com/alexcrichton/pkg-config-rs"
+[build-dependencies]
+gcc = "*"
+pkg-config = "*"

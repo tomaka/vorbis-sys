@@ -2,8 +2,7 @@ extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
 fn main() {
-    let opts = pkg_config::default_options("vorbis");
-    match pkg_config::find_library_opts("vorbis", &opts) {
+    match pkg_config::find_library("vorbis") {
         Ok(()) => return,
         Err(..) => {}
     };
