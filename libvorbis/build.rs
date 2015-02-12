@@ -2,13 +2,16 @@ extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
 fn main() {
+    let root = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap())
+                    .join("libvorbis");
+
+    println!("cargo:include={}", root.join("include").as_str().unwrap());
+    println!("cargo:src={}", root.join("lib").as_str().unwrap());
+
     match pkg_config::find_library("vorbis") {
-        Ok(()) => return,
+        Ok(_) => return,
         Err(..) => {}
     };
-
-    let root = Path::new(std::env::var_string("CARGO_MANIFEST_DIR").unwrap())
-                    .join("libvorbis");
 
     gcc::Config::new()
                 .file("libvorbis/lib/analysis.c")
@@ -36,6 +39,6 @@ fn main() {
                 .define("LIBVORBIS_EXPORTS", None)
                 .include(root.join("include"))
                 .include(root.join("lib"))
-                .include(Path::new(std::env::var_string("DEP_OGG_INCLUDE").unwrap()))
+                .include(Path::new(std::env::var("DEP_OGG_INCLUDE").unwrap()))
                 .compile("libvorbis.a");
 }
