@@ -1,17 +1,21 @@
 extern crate "pkg-config" as pkg_config;
 extern crate gcc;
 
+use std::path::PathBuf;
+
 fn main() {
-    let root = Path::new(std::env::var("CARGO_MANIFEST_DIR").unwrap())
+    let root = PathBuf::new(&std::env::var("CARGO_MANIFEST_DIR").unwrap())
                     .join("libvorbis");
 
-    println!("cargo:include={}", root.join("include").as_str().unwrap());
-    println!("cargo:src={}", root.join("lib").as_str().unwrap());
+    println!("cargo:include={}", root.join("include").into_os_string().into_string().unwrap());
+    println!("cargo:src={}", root.join("lib").into_os_string().into_string().unwrap());
 
     match pkg_config::find_library("vorbis") {
         Ok(_) => return,
         Err(..) => {}
     };
+
+    let ogg_inc = PathBuf::new(&std::env::var("DEP_OGG_INCLUDE").unwrap());
 
     gcc::Config::new()
                 .file("libvorbis/lib/analysis.c")
@@ -37,8 +41,8 @@ fn main() {
                 .file("libvorbis/lib/window.c")
                 .define("_USRDLL", None)
                 .define("LIBVORBIS_EXPORTS", None)
-                .include(root.join("include"))
-                .include(root.join("lib"))
-                .include(Path::new(std::env::var("DEP_OGG_INCLUDE").unwrap()))
+                .include(&root.join("include"))
+                .include(&root.join("lib"))
+                .include(&ogg_inc)
                 .compile("libvorbis.a");
 }
