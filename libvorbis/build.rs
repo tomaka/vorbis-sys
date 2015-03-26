@@ -1,11 +1,11 @@
-extern crate "pkg-config" as pkg_config;
+extern crate pkg_config;
 extern crate gcc;
 
-use std::path::PathBuf;
+use std::path::Path;
 
 fn main() {
-    let root = PathBuf::new(&std::env::var("CARGO_MANIFEST_DIR").unwrap())
-                    .join("libvorbis");
+    let root = std::env::var("CARGO_MANIFEST_DIR").unwrap();
+    let root = Path::new(&root).join("libvorbis");
 
     println!("cargo:include={}", root.join("include").into_os_string().into_string().unwrap());
     println!("cargo:src={}", root.join("lib").into_os_string().into_string().unwrap());
@@ -15,7 +15,8 @@ fn main() {
         Err(..) => {}
     };
 
-    let ogg_inc = PathBuf::new(&std::env::var("DEP_OGG_INCLUDE").unwrap());
+    let ogg_inc = std::env::var("DEP_OGG_INCLUDE").unwrap();
+    let ogg_inc = Path::new(&ogg_inc);
 
     gcc::Config::new()
                 .file("libvorbis/lib/analysis.c")

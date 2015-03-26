@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
 extern crate libc;
-extern crate "ogg-sys" as ogg;
+extern crate ogg_sys as ogg;
 
 #[repr(C)]
 pub struct vorbis_info {
