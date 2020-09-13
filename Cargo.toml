@@ -12,5 +12,5 @@ ogg-sys = "0.0.9"
 libc = "0.2.65"
 
 [build-dependencies]
-gcc = "0.3"
+cc = "1.0"
 pkg-config = "0.3"
