@@ -38,7 +38,6 @@ fn main() {
         .file("libvorbis/lib/lsp.c")
         .file("libvorbis/lib/mapping0.c")
         .file("libvorbis/lib/mdct.c")
-        .file("libvorbis/lib/misc.c")
         .file("libvorbis/lib/psy.c")
         .file("libvorbis/lib/registry.c")
         .file("libvorbis/lib/res0.c")
