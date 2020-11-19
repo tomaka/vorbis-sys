@@ -1,6 +1,6 @@
 # vorbis-sys
 
-libvorbis v1.3.4 bindings for Rust
+libvorbis v1.3.7 bindings for Rust
 
 ```toml
 [dependencies.vorbis-sys]
